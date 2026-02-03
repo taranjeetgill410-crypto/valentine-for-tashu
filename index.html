@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tashu ❤️ My Valentine for Life</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #41295a, #2F0743);
+      font-family: "Segoe UI", sans-serif;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: normal;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff5f8a;
+      color: white;
+      font-size: 1.3rem;
+    }
+
+    #noBtn {
+      background: #555;
+      color: white;
+      position: absolute;
+    }
+
+    /* Moon */
+    .moon {
+      position: absolute;
+      top: 40px;
+      right: 60px;
+      width: 110px;
+      height: 110px;
+      background: #fff4cc;
+      border-radius: 50%;
+      box-shadow: 0 0 40px #fff;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -30px;
+      color: rgba(255, 180, 200, 0.9);
+      font-size: 20px;
+      animation: floatUp 9s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Music (starts after first tap – iPhone friendly) -->
+  <audio id="music" loop>
+    <source
+      src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+      type="audio/mpeg"
+    />
+  </audio>
+
+  <div class="moon"></div>
+
+  <div class="container" onclick="playMusic()">
+    <h1>Tashu ❤️</h1>
+    <h2>Will you be my Valentine? 🌙✨</h2>
+
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn">No 😄</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const music = document.getElementById("music");
+    let musicStarted = false;
+
+    function playMusic() {
+      if (!musicStarted) {
+        music.play();
+        musicStarted = true;
+      }
+    }
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      let size = parseFloat(
+        window.getComputedStyle(yesBtn).fontSize
+      );
+      yesBtn.style.fontSize = size + 2 + "px";
+    });
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          height:100vh;
+          background:linear-gradient(135deg,#ff758c,#ff7eb3);
+          color:white;
+          text-align:center;
+          padding:25px;
+        ">
+          <h1>Always ❤️</h1>
+          <p style="font-size:1.5rem; max-width:650px;">
+            We are already married 💍<br><br>
+            You are not just my Valentine,<br>
+            <strong>you are my Valentine for life.</strong> 💖<br><br>
+            Every day with you is love, laughter, and home 🌙✨
+          </p>
+          <p style="margin-top:25px; font-size:1.3rem;">
+            — Forever yours,<br>
+            <strong>Taran ❤️</strong>
+          </p>
+        </div>
+      `;
+    }
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 25 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 9000);
+    }, 400);
+  </script>
+</body>
+</html>
